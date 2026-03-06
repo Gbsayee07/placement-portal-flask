@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Manage Drives{% endblock %}
+{% block content %}
+
+<h2 class="mb-3">Manage Placement Drives</h2>
+
+<h4>Pending Drive Approvals</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Job Title</th>
+      <th>Deadline</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for d in pending_drives %}
+    <tr>
+      <td>{{ d.company.company_name }}</td>
+      <td>{{ d.job_title }}</td>
+      <td>{{ d.deadline }}</td>
+      <td><span class="badge bg-warning text-dark">Pending</span></td>
+      <td>
+        <a class="btn btn-success btn-sm" href="{{ url_for('admin.approve_drive', drive_id=d.id) }}">Approve</a>
+        <a class="btn btn-danger btn-sm" href="{{ url_for('admin.reject_drive', drive_id=d.id) }}">Reject</a>
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="5">No pending drives.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<hr class="my-4">
+
+<h4>All Drives</h4>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Job Title</th>
+      <th>Deadline</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for d in all_drives %}
+    <tr>
+      <td>{{ d.company.company_name }}</td>
+      <td>{{ d.job_title }}</td>
+      <td>{{ d.deadline }}</td>
+      <td>{{ d.status }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="4">No drives created yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

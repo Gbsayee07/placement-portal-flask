@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Admin Dashboard</h2>
+<a class="btn btn-dark mb-3" href="{{ url_for('admin.drives') }}">Manage Drives</a>
+
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5>Total Students</h5>
+        <h3>{{ total_students }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5>Total Companies</h5>
+        <h3>{{ total_companies }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5>Placement Drives</h5>
+        <h3>{{ total_drives }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5>Applications</h5>
+        <h3>{{ total_applications }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>Pending Company Approvals</h4>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>HR</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for company in pending_companies %}
+    <tr>
+      <td>{{ company.company_name }}</td>
+      <td>{{ company.hr_name }}</td>
+      <td>{{ company.hr_email }}</td>
+      <td>
+        <a class="btn btn-success btn-sm"
+           href="{{ url_for('admin.approve_company', company_id=company.id) }}">
+           Approve
+        </a>
+
+        <a class="btn btn-danger btn-sm"
+           href="{{ url_for('admin.reject_company', company_id=company.id) }}">
+           Reject
+        </a>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4">No pending companies</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

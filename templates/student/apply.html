@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Apply{% endblock %}
+{% block content %}
+
+<h3 class="mb-2">Apply to Drive</h3>
+<p class="text-muted">
+  <strong>{{ drive.company.company_name }}</strong> — {{ drive.job_title }}
+</p>
+
+<form method="post" enctype="multipart/form-data" class="card card-body">
+  <div class="mb-3">
+    <label class="form-label">Upload Resume (required for this application)</label>
+    <input class="form-control" type="file" name="resume" required>
+    <div class="form-text">Allowed: PDF, DOC, DOCX</div>
+  </div>
+
+  <button class="btn btn-primary">Submit Application</button>
+  <a class="btn btn-secondary" href="{{ url_for('student.dashboard') }}">Cancel</a>
+</form>
+
+{% endblock %}

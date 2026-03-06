@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Company Registration{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-7">
+    <h3 class="mb-3">Company Registration</h3>
+    <form method="post" class="card card-body">
+      <div class="mb-3">
+        <label class="form-label">Company Name *</label>
+        <input class="form-control" name="company_name" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">HR Name</label>
+        <input class="form-control" name="hr_name">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">HR Email</label>
+        <input class="form-control" name="hr_email" type="email">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input class="form-control" name="phone">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Website</label>
+        <input class="form-control" name="website">
+      </div>
+      <hr>
+      <div class="mb-3">
+        <label class="form-label">Login Email *</label>
+        <input class="form-control" name="email" type="email" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password *</label>
+        <input class="form-control" name="password" type="password" required>
+      </div>
+      <button class="btn btn-primary w-100">Register</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

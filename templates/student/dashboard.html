@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-3">Student Dashboard</h2>
+
+<p class="text-muted mb-4">
+  Welcome, <strong>{{ student.full_name }}</strong>
+</p>
+
+<h4>Available Placement Drives</h4>
+<a class="btn btn-outline-dark mb-3" href="{{ url_for('student.profile') }}">My Profile</a>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Job Title</th>
+      <th>Deadline</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  {% for drive in drives %}
+
+    <tr>
+      <td>{{ drive.company.company_name }}</td>
+      <td>{{ drive.job_title }}</td>
+      <td>{{ drive.deadline }}</td>
+
+      <td>
+
+        {% if drive.id in applications %}
+
+            {% set app = applications[drive.id] %}
+
+            {% if app.status == "applied" %}
+                <span class="badge bg-secondary">Applied</span>
+            {% elif app.status == "shortlisted" %}
+                <span class="badge bg-warning text-dark">Shortlisted</span>
+            {% elif app.status == "selected" %}
+                <span class="badge bg-success">Selected</span>
+            {% elif app.status == "rejected" %}
+                <span class="badge bg-danger">Rejected</span>
+            {% endif %}
+
+        {% else %}
+
+            <a class="btn btn-primary btn-sm"
+               href="{{ url_for('student.apply', drive_id=drive.id) }}">
+               Apply
+            </a>
+
+        {% endif %}
+
+      </td>
+
+    </tr>
+
+  {% else %}
+
+    <tr>
+      <td colspan="4">No placement drives available.</td>
+    </tr>
+
+  {% endfor %}
+
+  </tbody>
+</table>
+
+{% endblock %}

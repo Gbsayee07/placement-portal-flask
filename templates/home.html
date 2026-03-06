@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Home | Placement Portal{% endblock %}
+{% block content %}
+<div class="p-4 bg-light rounded">
+  <h2>Placement Portal</h2>
+  <p class="mb-3">Login or register to continue.</p>
+  <a class="btn btn-primary" href="{{ url_for('auth.login') }}">Login</a>
+  <a class="btn btn-outline-secondary" href="{{ url_for('auth.register_student') }}">Register Student</a>
+  <a class="btn btn-outline-secondary" href="{{ url_for('auth.register_company') }}">Register Company</a>
+</div>
+{% endblock %}
